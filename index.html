@@ -2,11 +2,28 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Projem</title>
+    <title>Kullanıcı Paneli</title>
+    <style>
+        /* Admin paneli başlangıçta gizli olsun */
+        #admin-panel { display: none; background: #f4f4f4; padding: 20px; margin-top: 20px; border: 1px solid #ccc; }
+        /* Admin tetikleyici küçük kırmızı kare */
+        #admin-trigger { width: 20px; height: 20px; background: red; cursor: pointer; position: fixed; bottom: 10px; right: 10px; }
+        .user-item { margin-bottom: 10px; border-bottom: 1px solid #ddd; padding: 5px; }
+    </style>
     <script src="script.js" defer></script>
 </head>
 <body>
-    <h1 id="baslik">Yükleniyor...</h1>
-    <div id="icerik"></div>
+
+    <h1>Hoş Geldiniz</h1>
+    
+    <button id="register-btn">Kayıt Ol</button>
+
+    <div id="admin-panel">
+        <h2>Admin Paneli - Kullanıcı Listesi</h2>
+        <div id="user-list"></div>
+    </div>
+
+    <div id="admin-trigger" title="Admin Girişi"></div>
+
 </body>
 </html>
