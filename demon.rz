@@ -1,0 +1,67 @@
+@page "/"
+
+<div style="text-align: center; font-family: sans-serif;">
+    <h3>Kullanıcı Kayıt Sistemi</h3>
+
+    <div style="margin-bottom: 20px; border: 1px solid #ccc; padding: 15px; display: inline-block;">
+        <input @bind="yeniKullanici" placeholder="Kullanıcı Adı" /><br /><br />
+        <input @bind="yeniSifre" type="password" placeholder="Şifre" /><br /><br />
+        <button @onclick="Kaydol">Kaydol</button>
+    </div>
+
+    <br /><br />
+
+    <div @onclick="SifreSor" 
+         style="width:50px; height:50px; background-color:red; margin: 0 auto; cursor:pointer; border-radius: 5px;" 
+         title="Yönetici Paneli">
+    </div>
+
+    @if (listeyiGoster)
+    {
+        <div style="margin-top: 20px; background: #f9f9f9; padding: 10px;">
+            <h4>Kayıtlı Kullanıcılar (Admin Paneli)</h4>
+            <ul>
+                @foreach (var user in kullaniciListesi)
+                {
+                    <li><strong>@user.Ad</strong> - Şifre: @user.Sifre</li>
+                }
+            </ul>
+        </div>
+    }
+</div>
+
+@code {
+    private string yeniKullanici;
+    private string yeniSifre;
+    private bool listeyiGoster = false;
+
+    // Kullanıcı verilerini tutan basit bir sınıf
+    public class Kullanici {
+        public string Ad { get; set; }
+        public string Sifre { get; set; }
+    }
+
+    // Listemiz (Gerçek bir projede burası Veritabanından gelmeli)
+    private static List<Kullanici> kullaniciListesi = new List<Kullanici>();
+
+    private void Kaydol() {
+        if (!string.IsNullOrEmpty(yeniKullanici) && !string.IsNullOrEmpty(yeniSifre)) {
+            kullaniciListesi.Add(new Kullanici { Ad = yeniKullanici, Sifre = yeniSifre });
+            yeniKullanici = "";
+            yeniSifre = "";
+            Console.WriteLine("Kullanıcı kaydedildi!");
+        }
+    }
+
+    private async Task SifreSor() {
+        // Tarayıcıda şifre sorma kutusu açar
+        // Not: Gerçek projelerde JS Interop veya bir modal kullanılır
+        string girilen = "dfelop"; // Normalde kullanıcıdan input ile alınır
+        
+        // Örnek olması için direkt kontrol:
+        if (girilen == "dfelop") {
+            listeyiGoster = !listeyiGoster; // Kareye her basışta aç/kapat yapar
+        }
+    }
+}
+
